@@ -1,0 +1,10 @@
+# Original camera files. The web-ready .jpg/.mp4 versions used by the README
+# live alongside them in media/ and are the ones committed — GitHub can't
+# display HEIC, and the originals are ~100 MB.
+media/IMG_*.HEIC
+media/IMG_*.MOV
+
+# Arduino IDE build output
+build/
+*.hex
+*.elf
