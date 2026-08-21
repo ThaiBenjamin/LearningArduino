@@ -76,7 +76,9 @@ Activity 1 is the whole point of starting here — the first time something I wr
 
 The fade is the first sketch where the LED is not simply on or off. PWM switches the pin faster than the eye resolves, and the duty cycle reads as brightness:
 
-<video src="https://github.com/ThaiBenjamin/LearningArduino/raw/main/media/02-led-fade.mp4" controls muted loop width="600"></video>
+[![PWM switches the pin faster than the eye resolves, and the duty cycle reads as brightness](media/thumbs/02-led-fade.jpg)](media/02-led-fade.mp4)
+
+▶ **[Play the clip](media/02-led-fade.mp4)** — PWM switches the pin faster than the eye resolves, and the duty cycle reads as brightness.
 
 ---
 
@@ -92,13 +94,17 @@ The LED rig from Phase 1, rebuilt that evening with the IDE open and the sketch 
 
 ![The LED and button rig with the Arduino IDE open on the monitor](media/03-led-and-button.jpg)
 
-<video src="https://github.com/ThaiBenjamin/LearningArduino/raw/main/media/03-led-switching.mp4" controls muted loop width="600"></video>
+[![The LED driven straight from the sketch](media/thumbs/03-led-switching.jpg)](media/03-led-switching.mp4)
+
+▶ **[Play the clip](media/03-led-switching.mp4)** — The LED driven straight from the sketch.
 
 Then the button goes in. Nothing is lit until the circuit is closed:
 
 ![A pushbutton wired into the breadboard, everything off](media/04-button-wired.jpg)
 
-<video src="https://github.com/ThaiBenjamin/LearningArduino/raw/main/media/04-button-press.mp4" controls muted loop width="600"></video>
+[![Press the button, the LED comes on](media/thumbs/04-button-press.jpg)](media/04-button-press.mp4)
+
+▶ **[Play the clip](media/04-button-press.mp4)** — Press the button, the LED comes on.
 
 The divide that matters here is `digitalRead` versus `analogRead`. A button answers one bit. A potentiometer answers a number from 0 to 1023, which then has to be divided by 4 to fit the 0–255 that `analogWrite` accepts — the first time a unit mismatch between two APIs actually mattered.
 
@@ -115,11 +121,15 @@ The divide that matters here is `digitalRead` versus `analogRead`. A button answ
 
 ![Three LEDs on the breadboard mid-cycle, red and yellow lit](media/05-traffic-light.jpg)
 
-<video src="https://github.com/ThaiBenjamin/LearningArduino/raw/main/media/05-traffic-light.mp4" controls muted loop width="600"></video>
+[![The red - green - yellow cycle running](media/thumbs/05-traffic-light.jpg)](media/05-traffic-light.mp4)
+
+▶ **[Play the clip](media/05-traffic-light.mp4)** — The red - green - yellow cycle running.
 
 Activity 7 is the first refactor rather than a new feature. Activity 6 works, but it repeats `digitalWrite` six times against hardcoded pin names. Activity 7 puts the pins in `LEDPinArray[]` and moves the behavior into `setLEDPinModes`, `turnOffAllLEDs`, and `toggleLEDs` — same output, but adding a fourth LED becomes one array entry instead of a search-and-replace.
 
-<video src="https://github.com/ThaiBenjamin/LearningArduino/raw/main/media/07-button-toggles-pattern.mp4" controls muted loop width="600"></video>
+[![A button press swaps between the two LED patterns](media/thumbs/07-button-toggles-pattern.jpg)](media/07-button-toggles-pattern.mp4)
+
+▶ **[Play the clip](media/07-button-toggles-pattern.mp4)** — A button press swaps between the two LED patterns.
 
 ---
 
@@ -140,7 +150,9 @@ This is the phase the final project is actually built on.
 
 Activity 11 is the payoff — an LED blinking on its own schedule while a button is watched at the same time, neither one blocking the other:
 
-<video src="https://github.com/ThaiBenjamin/LearningArduino/raw/main/media/11-blink-and-button.mp4" controls muted loop width="600"></video>
+[![One LED blinking on its own timer while the button is watched at the same time](media/thumbs/11-blink-and-button.jpg)](media/11-blink-and-button.mp4)
+
+▶ **[Play the clip](media/11-blink-and-button.mp4)** — One LED blinking on its own timer while the button is watched at the same time.
 
 Debouncing shows up in two forms. The blunt version in activities 6 and 7 is `delay(300)` after a press, which works and stops the sketch. The version in activity 11 compares timestamps and never blocks. Activity 12 then moves the press onto a hardware interrupt, which brings its own rule: an ISR must be short, and anything it shares with `loop()` has to be `volatile` or the compiler will optimize the read away.
 
@@ -164,7 +176,9 @@ Activity 14 measures distance the easy way and shows why it isn't good enough: `
 
 ![The ultrasonic sensor wired alongside three range LEDs](media/15-ultrasonic-leds.jpg)
 
-<video src="https://github.com/ThaiBenjamin/LearningArduino/raw/main/media/15-ultrasonic-range.mp4" controls muted loop width="600"></video>
+[![A hand moving toward the sensor, and the LEDs changing with the range](media/thumbs/15-ultrasonic-range.jpg)](media/15-ultrasonic-range.mp4)
+
+▶ **[Play the clip](media/15-ultrasonic-range.mp4)** — A hand moving toward the sensor, and the LEDs changing with the range.
 
 The LCD arrives in activity 16, in 4-bit mode to save pins. Padding matters more than it looks: the display has no concept of clearing one line, so a shorter string leaves the tail of the previous one on screen unless it's padded out to 16 characters.
 
