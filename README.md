@@ -1,14 +1,8 @@
-# 🔌 Learning Arduino
+# Learning Arduino
 
 Twenty activities working up from blinking one LED to driving an LCD, an ultrasonic rangefinder, and an IR remote — the groundwork for my [Arduino final project](https://github.com/ThaiBenjamin/arduino-obstacle-detector).
 
-![Arduino](https://img.shields.io/badge/Arduino-UNO_R3-00979D?logo=arduino&logoColor=white)
-![C++](https://img.shields.io/badge/C++-Embedded-00599C?logo=cplusplus&logoColor=white)
-![Activities](https://img.shields.io/badge/Activities-20-1E417A)
-
----
-
-## ✨ What's Here
+## What's here
 
 Each `activityN.ino` is one self-contained sketch, kept exactly as it ran on the board. They are ordered, and they build on each other: every technique introduced here shows up again in the final project.
 
@@ -23,7 +17,7 @@ Each `activityN.ino` is one self-contained sketch, kept exactly as it ran on the
 
 ---
 
-## 🛠️ Hardware
+## Hardware
 
 | Component | Used in |
 |---|---|
@@ -39,9 +33,8 @@ Each `activityN.ino` is one self-contained sketch, kept exactly as it ran on the
 
 ---
 
-## 🚀 Setup & Running
+## Running an activity
 
-### Prerequisites
 - [Arduino IDE](https://www.arduino.cc/en/software) 2.x
 - An Arduino UNO (or clone) and the parts above
 - Libraries via **Sketch → Include Library → Manage Libraries**:
@@ -61,7 +54,7 @@ Open any `activityN.ino` in the Arduino IDE, select **Tools → Board → Arduin
 
 ---
 
-## 📚 The Activities
+## The activities
 
 ### Phase 1 — Output: on/off, then in between
 
@@ -78,7 +71,7 @@ The fade is the first sketch where the LED is not simply on or off. PWM switches
 
 ![PWM switches the pin faster than the eye resolves, and the duty cycle reads as brightness](media/gif/02-led-fade.gif)
 
-▶ **[Full clip](media/02-led-fade.mp4)** — PWM switches the pin faster than the eye resolves, and the duty cycle reads as brightness.
+[Full clip](media/02-led-fade.mp4) — PWM switches the pin faster than the eye resolves, and the duty cycle reads as brightness.
 
 ---
 
@@ -96,7 +89,7 @@ The LED rig from Phase 1, rebuilt that evening with the IDE open and the sketch 
 
 ![The LED driven straight from the sketch](media/gif/03-led-switching.gif)
 
-▶ **[Full clip](media/03-led-switching.mp4)** — The LED driven straight from the sketch.
+[Full clip](media/03-led-switching.mp4) — The LED driven straight from the sketch.
 
 Then the button goes in. Nothing is lit until the circuit is closed:
 
@@ -104,7 +97,7 @@ Then the button goes in. Nothing is lit until the circuit is closed:
 
 ![Press the button, the LED comes on](media/gif/04-button-press.gif)
 
-▶ **[Full clip](media/04-button-press.mp4)** — Press the button, the LED comes on.
+[Full clip](media/04-button-press.mp4) — Press the button, the LED comes on.
 
 The divide that matters here is `digitalRead` versus `analogRead`. A button answers one bit. A potentiometer answers a number from 0 to 1023, which then has to be divided by 4 to fit the 0–255 that `analogWrite` accepts — the first time a unit mismatch between two APIs actually mattered.
 
@@ -123,13 +116,13 @@ The divide that matters here is `digitalRead` versus `analogRead`. A button answ
 
 ![The red - green - yellow cycle running](media/gif/05-traffic-light.gif)
 
-▶ **[Full clip](media/05-traffic-light.mp4)** — The red - green - yellow cycle running.
+[Full clip](media/05-traffic-light.mp4) — The red - green - yellow cycle running.
 
 Activity 7 is the first refactor rather than a new feature. Activity 6 works, but it repeats `digitalWrite` six times against hardcoded pin names. Activity 7 puts the pins in `LEDPinArray[]` and moves the behavior into `setLEDPinModes`, `turnOffAllLEDs`, and `toggleLEDs` — same output, but adding a fourth LED becomes one array entry instead of a search-and-replace.
 
 ![A button press swaps between the two LED patterns](media/gif/07-button-toggles-pattern.gif)
 
-▶ **[Full clip](media/07-button-toggles-pattern.mp4)** — A button press swaps between the two LED patterns.
+[Full clip](media/07-button-toggles-pattern.mp4) — A button press swaps between the two LED patterns.
 
 ---
 
@@ -152,7 +145,7 @@ Activity 11 is the payoff — an LED blinking on its own schedule while a button
 
 ![One LED blinking on its own timer while the button is watched at the same time](media/gif/11-blink-and-button.gif)
 
-▶ **[Full clip](media/11-blink-and-button.mp4)** — One LED blinking on its own timer while the button is watched at the same time.
+[Full clip](media/11-blink-and-button.mp4) — One LED blinking on its own timer while the button is watched at the same time.
 
 Debouncing shows up in two forms. The blunt version in activities 6 and 7 is `delay(300)` after a press, which works and stops the sketch. The version in activity 11 compares timestamps and never blocks. Activity 12 then moves the press onto a hardware interrupt, which brings its own rule: an ISR must be short, and anything it shares with `loop()` has to be `volatile` or the compiler will optimize the read away.
 
@@ -178,7 +171,7 @@ Activity 14 measures distance the easy way and shows why it isn't good enough: `
 
 ![A hand moving toward the sensor, and the LEDs changing with the range](media/gif/15-ultrasonic-range.gif)
 
-▶ **[Full clip](media/15-ultrasonic-range.mp4)** — A hand moving toward the sensor, and the LEDs changing with the range.
+[Full clip](media/15-ultrasonic-range.mp4) — A hand moving toward the sensor, and the LEDs changing with the range.
 
 The LCD arrives in activity 16, in 4-bit mode to save pins. Padding matters more than it looks: the display has no concept of clearing one line, so a shorter string leaves the tail of the previous one on screen unless it's padded out to 16 characters.
 
@@ -190,7 +183,7 @@ Activity 17 puts the two together, and adds the filter. Raw HC-SR04 readings jum
 
 ---
 
-## 🧠 What I Built and Why
+## Why I worked through these
 
 I worked through these to get to the point where I could build something that ran on its own hardware rather than on my laptop, and the final project is the reason the list ends where it does. Everything in it — the interrupt-driven rangefinder, the LCD, the IR remote, the EEPROM-backed settings, the `millis()` scheduling that lets all of them run in the same `loop()` — is one of these twenty activities, assembled.
 
@@ -200,7 +193,7 @@ The other thing I didn't expect was how much of the difficulty is physical. A sk
 
 ---
 
-## 📂 Repo Layout
+## Layout
 
 ```
 LearningArduino/
